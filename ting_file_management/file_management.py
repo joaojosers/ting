@@ -10,7 +10,7 @@ def txt_importer(path_file):
         # Abre o arquivo para leitura
         with open(path_file, "r") as file:
             # Lê linhas file, retorna lista, remove caracteres quebra linha
-            return [line.rstrip('\n') for line in file.readlines()]
+            return [line.rstrip("\n") for line in file.readlines()]
 
     except FileNotFoundError:
         # Caso o arquivo não seja encontrado, exibe a mensagem de erro
