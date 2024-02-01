@@ -15,13 +15,15 @@ from ting_file_management.file_management import txt_importer
 
 def process(path_file, instance):
     # Obtém o nome do arquivo a partir do caminho completo
-    file_name = path_file
+    file = path_file
 
     # Verifica se o arquivo já foi processado anteriormente
-    if file_name in instance._data:
-        print(
-            f"Arquivo {file_name} já foi processado anteriormente. Ignorando."
-        )
+    for elem in instance._data:
+        if elem["nome_do_arquivo"] == file:
+
+            print(
+                f"Arquivo {file} já foi processado anteriormente. Ignorando."
+            )
         return
 
     # Importa as linhas do arquivo usando a função txt_importer
@@ -30,16 +32,16 @@ def process(path_file, instance):
     if file_lines is not None:
         # Cria um dicionário com as informações solicitadas
         file_info = {
-            "nome_do_arquivo": file_name,
+            "nome_do_arquivo": file,
             "qtd_linhas": len(file_lines),
             "linhas_do_arquivo": file_lines,
         }
 
         # Adiciona o nome do arquivo à fila
-        instance.enqueue(file_name)
+        instance.enqueue(file_info)
 
         # Mostra os dados processados via stdout
-        print(file_info)
+        return print(file_info)
 
 
 # Implemente a função remove
@@ -49,22 +51,14 @@ def remove(instance):  # print(instance)
     if inst is None:
         print("Não há elementos")
     else:
-        print(f" Arquivo {inst} removido com sucesso")
+        print(f" Arquivo {inst['nome_do_arquivo']} removido com sucesso")
 
 
 # Implemente a função file_metadata
 def file_metadata(instance, position):
-    if 0 <= position < len(instance):
-        file_name = instance.search(position)
-        file_lines = txt_importer(file_name)
-
-        if file_lines is not None:
-            metadata = {
-                "nome_do_arquivo": file_name,
-                "qtd_linhas": len(file_lines),
-                "linhas_do_arquivo": file_lines,
-            }
-            print(metadata)
+    if 0 <= position < len(instance._data):
+        dict = instance.search(position)
+        return print(dict)
 
     else:
         print("Posição inválida", file=sys.stderr)
