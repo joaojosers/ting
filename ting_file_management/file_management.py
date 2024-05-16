@@ -21,13 +21,3 @@ def txt_importer(path_file):
         # Caso a extensão do arquivo seja inválida, exibe a mensagem de erro
         print("Formato inválido", file=sys.stderr)
         return None
-
-
-# Exemplo de uso
-# if __name__ == "__main__":
-#     # Substitua "caminho/do/arquivo.txt" pelo caminho do arquivo desejado
-#     arquivo = "/statics/arquivo_teste.txt"
-
-#     linhas = txt_importer(arquivo)
-#     if linhas is not None:
-#         print(linhas)
